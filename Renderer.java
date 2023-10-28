@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 
-public class ChipRenderer extends JPanel {
+public class Renderer extends JPanel {
     private List<Chip> chips;
     private List<Ball> balls;
 
-    public ChipRenderer() {
+    public Renderer() {
         chips = new ArrayList<>();
         balls = new ArrayList<>();
     }

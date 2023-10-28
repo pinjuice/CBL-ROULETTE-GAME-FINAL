@@ -9,7 +9,7 @@ public class Gui {
     JLabel winningNumberLabel = new JLabel();
     JLabel rouletteLabel = new JLabel();
 
-    ChipRenderer chipRenderer;
+    Renderer renderer;
     BettingTimer bettingTimer;
     BettingMechanic bettingMechanic;
     Squares squares;
@@ -35,16 +35,16 @@ public class Gui {
         winningNumberLabel.setBounds(870, 40, 300, 50);
         frame.add(winningNumberLabel);
 
-        chipRenderer = new ChipRenderer();
+        renderer = new Renderer();
         // NOTE: You'll need to initialize rouletteTriangles here as well before using it
         // rouletteTriangles = new RouletteTriangles(...);
         rouletteTriangles = new RouletteTriangles();
-        rouletteLogic = new RouletteLogic(balance, squares, winningNumberLabel, rouletteTriangles, chipRenderer);
+        rouletteLogic = new RouletteLogic(balance, squares, winningNumberLabel, rouletteTriangles, renderer);
         rouletteAnimation = new RouletteAnimation(rouletteLabel, rouletteLogic);
         bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic);
         
-        chipRenderer.setBounds(0, 0, 1920, 1080);
-        chipRenderer.setOpaque(false);
+        renderer.setBounds(0, 0, 1920, 1080);
+        renderer.setOpaque(false);
 
         // Initialize and position BetSlider before BettingMechanic
         betSlider = new BetSlider(frame);
@@ -54,9 +54,9 @@ public class Gui {
         frame.add(betSlider.getButton());
         
         // Initialize BettingMechanic after BetSlider
-        bettingMechanic = new BettingMechanic(squares, chipRenderer, betSlider, bettingTimer, balance);
+        bettingMechanic = new BettingMechanic(squares, renderer, betSlider, bettingTimer, balance);
 
-        frame.add(chipRenderer);
+        frame.add(renderer);
      
         ImageIcon board = new ImageIcon("bettingboardCBL.jpg");
         labelBoard.setIcon(board);

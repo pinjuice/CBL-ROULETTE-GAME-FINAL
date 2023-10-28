@@ -10,21 +10,21 @@ import java.util.Map;
 
 public class BettingMechanic {
     private Squares squares;
-    private ChipRenderer chipRenderer;
+    private Renderer renderer;
     private BetSlider betSlider;
     private BettingTimer bettingTimer;
     private Balance balance;
     private int lastClickedSquare = -1;
     private Map<Integer, Chip> chipsBySquare = new HashMap<>();  // New field
 
-    public BettingMechanic(Squares squares, ChipRenderer chipRenderer, BetSlider betSlider, BettingTimer bettingTimer, Balance balance) {
+    public BettingMechanic(Squares squares, Renderer renderer, BetSlider betSlider, BettingTimer bettingTimer, Balance balance) {
         this.squares = squares;
-        this.chipRenderer = chipRenderer;  // Store the ChipRenderer instance
+        this.renderer = renderer;  // Store the ChipRenderer instance
         this.betSlider = betSlider;
         this.bettingTimer = bettingTimer;
         this.balance = balance;
 
-        chipRenderer.addMouseListener(new MouseAdapter() {
+        renderer.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 handleMousePressed(e);
@@ -63,7 +63,7 @@ public class BettingMechanic {
                 chip = new Chip(0, 0, Color.RED, betValue);
                 Rectangle selectedRect = squares.squares[lastClickedSquare];
                 chip.setPositionRect(selectedRect);
-                chipRenderer.addChip(chip);
+                renderer.addChip(chip);
                 chipsBySquare.put(lastClickedSquare, chip);  // Store the chip in the map
             } else {
                 // A chip for this square already exists, update its value
@@ -72,7 +72,7 @@ public class BettingMechanic {
 
             JOptionPane.showMessageDialog(null, "You bet " + betValue + "$ on square " + (lastClickedSquare) + ". Remaining balance: " + balance.getBalance());
             balance.updateDisplay();
-            chipRenderer.repaint();  // Ensure the ChipRenderer is repainted to reflect the new chip value
+            renderer.repaint();  // Ensure the ChipRenderer is repainted to reflect the new chip value
         }
         betSlider.hide();
     }

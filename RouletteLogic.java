@@ -13,14 +13,14 @@ public class RouletteLogic {
     private JLabel winningNumberLabel;
     private RouletteTriangles rouletteTriangles;
     private Ball ball;
-    private ChipRenderer chipRenderer;
+    private Renderer renderer;
 
-    public RouletteLogic(Balance balance, Squares squares, JLabel winningNumberLabel, RouletteTriangles rouletteTriangles, ChipRenderer chipRenderer) {
+    public RouletteLogic(Balance balance, Squares squares, JLabel winningNumberLabel, RouletteTriangles rouletteTriangles, Renderer renderer) {
         this.balance = balance;
         this.squares = squares;
         this.winningNumberLabel = winningNumberLabel;
         this.rouletteTriangles = rouletteTriangles;
-        this.chipRenderer = chipRenderer;
+        this.renderer = renderer;
     }
 
     public void spin() {
@@ -49,6 +49,6 @@ public class RouletteLogic {
         Point renderPoint = rouletteTriangles.renderPoints[triangleIndex];
         ball = new Ball(0, 0, Color.WHITE);
         ball.setPosition(renderPoint.x, renderPoint.y);
-        chipRenderer.addBall(ball);
+        renderer.addBall(ball);
     }
 }
