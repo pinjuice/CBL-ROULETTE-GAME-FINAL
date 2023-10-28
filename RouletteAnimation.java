@@ -11,11 +11,12 @@ public class RouletteAnimation {
     private JLabel rouletteLabel;
     private RouletteLogic rouletteLogic;
     private boolean isAnimationOver = false;
+    private PostAnimationTimer postAnimationTimer;
 
-    public RouletteAnimation(JLabel rouletteLabel, RouletteLogic rouletteLogic) {
+    public RouletteAnimation(JLabel rouletteLabel, RouletteLogic rouletteLogic, PostAnimationTimer postAnimationTimer) {
         this.rouletteLabel = rouletteLabel;
         this.rouletteLogic = rouletteLogic;
-
+        this.postAnimationTimer = postAnimationTimer;
         // Load all the images into the array
         for (int i = 0; i < 24; i++) {
             images[i] = new ImageIcon("roulette_animation/roulette" + (i + 1) + ".png");
@@ -47,6 +48,8 @@ public class RouletteAnimation {
                 rouletteLogic.placeChipOnTriangle(rouletteLogic.getWinningNumber());
                 stopTimer.stop();
                 isAnimationOver = true;
+                postAnimationTimer.startPostAnimationTimer();
+                rouletteLogic.checkWinningSquareAndUpdateBalance();
                 
             }
         });
@@ -56,4 +59,16 @@ public class RouletteAnimation {
     public boolean getIsAnimationOver() {
         return isAnimationOver;
     }
-}
+
+    public void resetAnimation() {
+        if (timer1.isRunning()) {
+            timer1.stop();
+        }
+        if (stopTimer != null && stopTimer.isRunning()) {
+            stopTimer.stop();
+        }
+        currentIndex = 0;
+        isAnimationOver = false;
+    }
+    
+}   

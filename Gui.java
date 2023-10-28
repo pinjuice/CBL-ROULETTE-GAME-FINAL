@@ -18,6 +18,10 @@ public class Gui {
     BetSlider betSlider;
     RouletteAnimation rouletteAnimation;
     RouletteTriangles rouletteTriangles;
+    PostAnimationTimer postAnimationTimer;
+
+    private int roundsPlayed = 0;
+    private static final int MAX_ROUNDS = 5;
 
     public Gui() {
         frame.setSize(1920, 1080);
@@ -31,17 +35,19 @@ public class Gui {
         frame.add(balanceDisplay);
         
         boardRectangles = new BoardRectangles();
+
+        postAnimationTimer = new PostAnimationTimer(this);
         
         winningNumberLabel.setBounds(870, 40, 300, 50);
         frame.add(winningNumberLabel);
-
+        
         renderer = new Renderer();
         // NOTE: You'll need to initialize rouletteTriangles here as well before using it
         // rouletteTriangles = new RouletteTriangles(...);
         rouletteTriangles = new RouletteTriangles();
         rouletteLogic = new RouletteLogic(balance, boardRectangles, winningNumberLabel, rouletteTriangles, renderer);
-        rouletteAnimation = new RouletteAnimation(rouletteLabel, rouletteLogic);
-        bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic);
+        rouletteAnimation = new RouletteAnimation(rouletteLabel, rouletteLogic, postAnimationTimer);
+        bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic, postAnimationTimer);
         
         renderer.setBounds(0, 0, 1920, 1080);
         renderer.setOpaque(false);
@@ -69,6 +75,22 @@ public class Gui {
         frame.add(rouletteLabel);
         
         frame.setVisible(true);
+
+        setupNewRound();
+    }
+    public void endOfRound() {
+        roundsPlayed++;
+        if (roundsPlayed < MAX_ROUNDS) {
+            setupNewRound();
+        } else {
+            JOptionPane.showMessageDialog(frame, "Game Over CHRISTOPHER");
+        }
+    }
+    public void setupNewRound() {
+        renderer.reset();
+        bettingMechanic.resetBets();
+        bettingTimer.resetTimer();
+        rouletteAnimation.resetAnimation();
     }
     public static void main(String[] args) {
         new Gui();

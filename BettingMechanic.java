@@ -76,4 +76,11 @@ public class BettingMechanic {
         }
         betSlider.hide();
     }
+
+    public void resetBets() {
+        for (int i = 0; i < boardRectangles.getNumberOfSquares(); i++) {
+            boardRectangles.sumBoardRectangles[i] = 0;
+        }
+        chipsByRectangle.clear();
+    }
 }

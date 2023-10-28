@@ -28,6 +28,12 @@ public class Renderer extends JPanel {
         return balls;
     }
 
+    public void reset() {
+        chips.clear();
+        balls.clear();
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

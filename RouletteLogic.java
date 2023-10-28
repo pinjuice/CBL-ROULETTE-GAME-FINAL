@@ -5,7 +5,7 @@ import java.util.Random;
 import javax.swing.JLabel;
 
 public class RouletteLogic {
-    private int upperbound = 12;
+    private int upperbound = 13;
     Random rand = new Random();
     private int int_random;
     private Balance balance;

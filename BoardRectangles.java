@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 
 public class BoardRectangles {
     public Rectangle[] boardRectangles;
-    private int[] sumBoardRectangles;
+    public int[] sumBoardRectangles;
     private JLabel[] sumBoardRectanglesLabels;
 
     public BoardRectangles() {
