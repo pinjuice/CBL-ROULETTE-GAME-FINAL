@@ -12,7 +12,7 @@ public class Gui {
     Renderer renderer;
     BettingTimer bettingTimer;
     BettingMechanic bettingMechanic;
-    Squares squares;
+    BoardRectangles boardRectangles;
     Balance balance = new Balance(1000, balanceDisplay);
     RouletteLogic rouletteLogic;
     BetSlider betSlider;
@@ -30,7 +30,7 @@ public class Gui {
         balanceDisplay.setBounds(700, 10, 300, 50);
         frame.add(balanceDisplay);
         
-        squares = new Squares();
+        boardRectangles = new BoardRectangles();
         
         winningNumberLabel.setBounds(870, 40, 300, 50);
         frame.add(winningNumberLabel);
@@ -39,7 +39,7 @@ public class Gui {
         // NOTE: You'll need to initialize rouletteTriangles here as well before using it
         // rouletteTriangles = new RouletteTriangles(...);
         rouletteTriangles = new RouletteTriangles();
-        rouletteLogic = new RouletteLogic(balance, squares, winningNumberLabel, rouletteTriangles, renderer);
+        rouletteLogic = new RouletteLogic(balance, boardRectangles, winningNumberLabel, rouletteTriangles, renderer);
         rouletteAnimation = new RouletteAnimation(rouletteLabel, rouletteLogic);
         bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic);
         
@@ -54,7 +54,7 @@ public class Gui {
         frame.add(betSlider.getButton());
         
         // Initialize BettingMechanic after BetSlider
-        bettingMechanic = new BettingMechanic(squares, renderer, betSlider, bettingTimer, balance);
+        bettingMechanic = new BettingMechanic(boardRectangles, renderer, betSlider, bettingTimer, balance);
 
         frame.add(renderer);
      

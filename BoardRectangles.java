@@ -3,13 +3,13 @@ import java.awt.Rectangle;
 
 import javax.swing.JLabel;
 
-public class Squares {
-    public Rectangle[] squares;
-    private int[] sumSquares;
-    private JLabel[] sumSquaresLabels;
+public class BoardRectangles {
+    public Rectangle[] boardRectangles;
+    private int[] sumBoardRectangles;
+    private JLabel[] sumBoardRectanglesLabels;
 
-    public Squares() {
-        squares = new Rectangle[] {
+    public BoardRectangles() {
+        boardRectangles = new Rectangle[] {
             new Rectangle(871, 80, 1321-871, 176-80),
             new Rectangle(871, 182, 1018-871, 276-182),
             new Rectangle(1022, 182, 1171-1022, 276-182),
@@ -24,13 +24,13 @@ public class Squares {
             new Rectangle(1022, 485, 1171-1022, 580-485),
             new Rectangle(1175, 485, 1321-1175, 580-485)
         };
-        sumSquares = new int[squares.length];
-        sumSquaresLabels = new JLabel[squares.length];  // Initialize the sumSquares array with zeros
+        sumBoardRectangles = new int[boardRectangles.length];
+        sumBoardRectanglesLabels = new JLabel[boardRectangles.length];  // Initialize the sumSquares array with zeros
     }
 
     public int getSquareIndex(Point p) {
-        for (int i = 0; i < squares.length; i++) {
-            if (squares[i].contains(p)) {
+        for (int i = 0; i < boardRectangles.length; i++) {
+            if (boardRectangles[i].contains(p)) {
                 return i;
             }
         }
@@ -38,14 +38,14 @@ public class Squares {
     }
 
     public int getNumberOfSquares() {
-        return squares.length;
+        return boardRectangles.length;
     }
 
     public int[] getSumSquares() {
-        return sumSquares;
+        return sumBoardRectangles;
     }
 
     public JLabel[] getSumSquaresJLabels() {
-        return sumSquaresLabels;
+        return sumBoardRectanglesLabels;
     }
 }

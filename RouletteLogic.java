@@ -9,15 +9,15 @@ public class RouletteLogic {
     Random rand = new Random();
     private int int_random;
     private Balance balance;
-    private Squares squares;
+    private BoardRectangles boardRectangles;
     private JLabel winningNumberLabel;
     private RouletteTriangles rouletteTriangles;
     private Ball ball;
     private Renderer renderer;
 
-    public RouletteLogic(Balance balance, Squares squares, JLabel winningNumberLabel, RouletteTriangles rouletteTriangles, Renderer renderer) {
+    public RouletteLogic(Balance balance, BoardRectangles boardRectangles, JLabel winningNumberLabel, RouletteTriangles rouletteTriangles, Renderer renderer) {
         this.balance = balance;
-        this.squares = squares;
+        this.boardRectangles = boardRectangles;
         this.winningNumberLabel = winningNumberLabel;
         this.rouletteTriangles = rouletteTriangles;
         this.renderer = renderer;
@@ -30,7 +30,7 @@ public class RouletteLogic {
 
     public void checkWinningSquareAndUpdateBalance() {
         int winningSquare = getWinningNumber();
-        int[] sumSquares = squares.getSumSquares();
+        int[] sumSquares = boardRectangles.getSumSquares();
         if (sumSquares[winningSquare] > 0) {
             int winnings = sumSquares[winningSquare] * 13;
             balance.add(winnings);
