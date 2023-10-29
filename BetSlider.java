@@ -9,16 +9,9 @@ import javax.swing.*;
  */
 public class BetSlider {
 
-    /** Maximum value for the slider, representing 100%. */
     private static final int MAX_PERCENTAGE = 100;
-    
-    /** The JSlider used for selecting the percentage of the bet. */
     private JSlider slider;
-    
-    /** The JButton used to confirm or place the bet. */
     private JButton button;
-    
-    /** The parent frame containing the BetSlider. */
     public JFrame parentFrame;
 
     /**

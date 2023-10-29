@@ -8,14 +8,9 @@ import javax.swing.*;
  * </p>
  */
 public class Balance {
-    
-    /** Font for the JLabel that displays the balance. */
+
     private static final Font FONT_LARGE = new Font("SansSerif", Font.BOLD, 15);
-    
-    /** The current amount of the balance. */
     private int amount;
-    
-    /** JLabel to display the current balance to the user. */
     private JLabel balanceDisplay;
 
     /**

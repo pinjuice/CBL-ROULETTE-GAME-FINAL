@@ -10,13 +10,8 @@ import javax.swing.*;
  */
 public class RoundDisplay extends JLabel {
     
-    /** The current round number. */
     private int currentRound;
-    
-    /** The prefix text displayed before the round number on the label. */
     private static final String PREFIX = "Round: ";
-    
-    /** The font used for displaying the round. */
     private static final Font FONT_LARGE = 
         new Font("SansSerif", Font.BOLD, 24);
 

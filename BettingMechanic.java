@@ -7,7 +7,15 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.*;
 
-
+/**
+ * Manages the game's betting mechanics, allowing users to place bets on specific numbers.
+ * <p>
+ * This class provides mechanisms for detecting board rectangles clicks,
+ * displaying bet amounts, and placing bets based on a percentage of user's balance.
+ * The betting process is synchronized with other game components
+ * such as the renderer and betting timer.
+ * </p>
+ */
 public class BettingMechanic {
     private int lastClickedRectangle = -1;
     private Map<Integer, Chip> chipsByRectangle = new HashMap<>();
@@ -17,6 +25,15 @@ public class BettingMechanic {
     private BettingTimer bettingTimer;
     private Balance balance;
 
+    /**
+     * Constructs a new betting mechanic linked to the provided game components.
+     *
+     * @param boardRectangles An instance managing the game's board rectangles.
+     * @param renderer An instance rendering the game components.
+     * @param betSlider An interface allowing users to specify bet amounts.
+     * @param bettingTimer A timer managing the betting period.
+     * @param balance A user's balance.
+     */
     public BettingMechanic(BoardRectangles boardRectangles, Renderer renderer,
          BetSlider betSlider, BettingTimer bettingTimer, Balance balance) {
         this.boardRectangles = boardRectangles;
@@ -40,16 +57,25 @@ public class BettingMechanic {
         });
     }
 
+    /**
+     * Handles mouse press events to identify if a board rectangle was clicked.
+     *
+     * @param e The mouse event data.
+     */
     private void handleMousePressed(MouseEvent e) {
-        int squareIndex = boardRectangles.getBoardRectangleIndex(e.getPoint());
-        if (squareIndex != -1) {
-            lastClickedRectangle = squareIndex;  // Store the last clicked square
+        int boardRectangleIndex = boardRectangles.getBoardRectangleIndex(e.getPoint());
+        if (boardRectangleIndex != -1) {
+            lastClickedRectangle = boardRectangleIndex;  // Store the last clicked board rectangle
             if (!bettingTimer.isTimeOver() && balance.getBalance() > 0) {
                 betSlider.show();
             }    
         }
     }
 
+    /**
+     * Places a bet with amount of balance based on the slider value
+     * on the last clicked board rectangle.
+     */
     private void placeBet() {
         int percentage = betSlider.getSlider().getValue();
         int betValue = (int) (balance.getBalance() * (percentage / 100.0));
@@ -66,15 +92,16 @@ public class BettingMechanic {
                 chip.setPositionRect(selectedRect);
                 if (betValue > 0) {
                     renderer.addChip(chip);
-                    chipsByRectangle.put(lastClickedRectangle, chip);  // Store the chip in the map
+                    chipsByRectangle.put(lastClickedRectangle, chip);  // Stores the chip in the map
                 }
 
             } else {
                 // A chip for this square already exists, update its value
                 chip.setValue(chip.getValue() + betValue);
             }
+            // Displays a message using JOptionPane to notif the user about their bet
             UIManager.put("Button.focus", new Color(0, 0, 0, 0));
-            JOptionPane.showMessageDialog(null, "You bet " + betValue + "$ on square "
+            JOptionPane.showMessageDialog(null, "You bet " + betValue + "$ on number "
                  + (lastClickedRectangle) + ". Remaining balance: " 
                  + balance.getBalance() + "$", "Bet", JOptionPane.INFORMATION_MESSAGE);
 
@@ -84,6 +111,9 @@ public class BettingMechanic {
         betSlider.hide();
     }
 
+    /**
+     * Resets all the bets made and clears the placed chips.
+     */
     public void resetBets() {
         for (int i = 0; i < boardRectangles.getNumberOfBoardRectangles(); i++) {
             boardRectangles.sumBoardRectangles[i] = 0;

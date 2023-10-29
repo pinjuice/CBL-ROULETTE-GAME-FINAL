@@ -8,17 +8,10 @@ import java.awt.geom.Ellipse2D;
  * </p>
  */
 public class Ball {
-    
-    /** X-coordinate of the ball's center. */
+
     private int x;
-    
-    /** Y-coordinate of the ball's center. */
     private int y;
-    
-    /** The radius of the ball. */
     private final int radius = 20;
-    
-    /** The color of the ball. */
     private Color color;
 
     /**

@@ -12,19 +12,10 @@ import java.awt.geom.Ellipse2D;
  */
 public class Chip {
 
-    /** The x-coordinate of the chip's center. */
     private int x;
-
-    /** The y-coordinate of the chip's center. */
     private int y;
-
-    /** The "value" that the chip stores. */
     private int value;
-
-    /** The radius of the chip. */
     private final int radius = 30;
-
-    /** The color of the chip. */
     private Color color;
 
     /**

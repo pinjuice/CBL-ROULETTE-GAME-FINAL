@@ -2,6 +2,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+/**
+ * Handles the animation of the roulette spin.
+ * <p>
+ * This class manages the cycling of roulette images, simulating a spin animation 
+ * and then stopping on a specific image and to be exact the first image.
+ * It also triggers related actions once the spin is complete.
+ * </p>
+ */
 public class RouletteAnimation {
     
     private int currentIndex = 0;
@@ -12,6 +20,13 @@ public class RouletteAnimation {
     private RouletteLogic rouletteLogic;
     private PostAnimationTimer postAnimationTimer;
 
+    /**
+     * Constructs a new roulette animation instance.
+     *
+     * @param rouletteLabel The label where the roulette images will be displayed.
+     * @param rouletteLogic An instance managing the core game logic.
+     * @param postAnimationTimer An instance handling actions post-animation.
+     */
     public RouletteAnimation(JLabel rouletteLabel, RouletteLogic rouletteLogic,
          PostAnimationTimer postAnimationTimer) {
         this.rouletteLabel = rouletteLabel;
@@ -31,11 +46,23 @@ public class RouletteAnimation {
         });
     }
 
+    /**
+     * Cycles through the roulette images.
+     * This method updates the roulette label to display the next image in the sequence.
+     */
     private void updateImage() {
         rouletteLabel.setIcon(images[currentIndex]);
         currentIndex = (currentIndex + 1) % 24; // Cycle through the images
     }
 
+    /**
+     * Begins the roulette spin animation.
+     * <p>
+     * Starts the cycling of the roulette images, and upon completion of the spin,
+     * the ball is placed on the winning "number", 
+     * and post-animation actions are triggered.
+     * </p>
+     */
     public void startAnimation() {
         animationTimer = new  Timer(5000, new ActionListener() {
             @Override
@@ -46,13 +73,15 @@ public class RouletteAnimation {
                 rouletteLogic.placeChipOnTriangle(rouletteLogic.getWinningNumber());
                 postAnimationTimer.startPostAnimationTimer();
                 rouletteLogic.checkWinningBoardRectangleAndUpdateBalance();
-                
             }
         });
         roulettePhotosTimer.start();
         animationTimer.start();
     }
 
+    /**
+     * Resets the roulette animation, stopping any ongoing animations.
+     */
     public void resetAnimation() {
         if (roulettePhotosTimer.isRunning()) {
             roulettePhotosTimer.stop();
@@ -61,6 +90,5 @@ public class RouletteAnimation {
             animationTimer.stop();
         }
         currentIndex = 0;
-    }
-    
-}   
+    } 
+}
