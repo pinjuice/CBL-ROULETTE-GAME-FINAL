@@ -1,34 +1,46 @@
 import java.awt.Font;
 import javax.swing.*;
 
+/**
+ * A specialized JLabel that displays the current round in the game.
+ * <p>
+ * The class allows the round to be incremented.
+ * The round number is prefixed with the text "Round: " and displayed using a large font.
+ * </p>
+ */
 public class RoundDisplay extends JLabel {
     
+    /** The current round number. */
     private int currentRound;
+    
+    /** The prefix text displayed before the round number on the label. */
     private static final String PREFIX = "Round: ";
+    
+    /** The font used for displaying the round. */
     private static final Font FONT_LARGE = 
-        new Font("SansSerif", Font.BOLD, 24);  // Using a bold SansSerif font of size 24
+        new Font("SansSerif", Font.BOLD, 24);
 
-    // Constructor initializes the label with starting round
+    /**
+     * Default constructor initializes the label with starting round.
+     */
     public RoundDisplay() {
         super();
-        this.currentRound = 1;  // starting from round 1
-        this.setFont(FONT_LARGE);  // Set the font to the large size
+        this.currentRound = 1; 
+        this.setFont(FONT_LARGE);  
         updateDisplay();
     }
 
-    // Increment the round and update the label
+    /**
+     * Increment the round number by 1 and update the displayed label.
+     */
     public void incrementRound() {
         this.currentRound++;
         updateDisplay();
     }
 
-    // Reset to round 1
-    public void resetRound() {
-        this.currentRound = 1;
-        updateDisplay();
-    }
-
-    // Update the display label with the current round
+    /**
+     * Method to set the text of the JLabel to reflect the current round.
+     */
     private void updateDisplay() {
         this.setText(PREFIX + currentRound);
     }
