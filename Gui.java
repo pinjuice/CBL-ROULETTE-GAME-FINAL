@@ -114,11 +114,12 @@ public class Gui {
             setupNewRound();
         } else if (!(roundsPlayed < MAX_ROUNDS) && balance.getBalance() > 0) {
             UIManager.put("Button.focus", new Color(0,0,0,0));
-            JOptionPane.showMessageDialog(null, "Game over, your balance after 5 rounds is: " +balance.getBalance()+"$");
+            JOptionPane.showMessageDialog(null, "Game over, your balance after 5 rounds is: " + balance.getBalance() + "$", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+
             System.exit(0);
         } else if (!(balance.getBalance() > 0) && roundsPlayed < MAX_ROUNDS) {
             UIManager.put("Button.focus", new Color(0,0,0,0));
-            JOptionPane.showMessageDialog(null, "Insufficient balance, you were kicked out of the Casino");
+            JOptionPane.showMessageDialog(null, "Insufficient balance, you were kicked out of the Casino", "Game Over" , JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
     }
