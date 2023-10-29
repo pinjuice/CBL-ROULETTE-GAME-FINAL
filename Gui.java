@@ -6,7 +6,6 @@ public class Gui {
     JLabel labelBoard = new JLabel();
     JLabel timerLabel = new JLabel();
     JLabel balanceDisplay = new JLabel();
-    JLabel winningNumberLabel = new JLabel();
     JLabel rouletteLabel = new JLabel();
 
     Renderer renderer;
@@ -38,14 +37,11 @@ public class Gui {
 
         postAnimationTimer = new PostAnimationTimer(this);
         
-        winningNumberLabel.setBounds(870, 40, 300, 50);
-        frame.add(winningNumberLabel);
-        
         renderer = new Renderer();
         // NOTE: You'll need to initialize rouletteTriangles here as well before using it
         // rouletteTriangles = new RouletteTriangles(...);
         rouletteTriangles = new RouletteTriangles();
-        rouletteLogic = new RouletteLogic(balance, boardRectangles, winningNumberLabel, rouletteTriangles, renderer);
+        rouletteLogic = new RouletteLogic(balance, boardRectangles, rouletteTriangles, renderer);
         rouletteAnimation = new RouletteAnimation(rouletteLabel, rouletteLogic, postAnimationTimer);
         
         renderer.setBounds(0, 0, 1920, 1080);
@@ -82,8 +78,12 @@ public class Gui {
         roundsPlayed++;
         if (roundsPlayed < MAX_ROUNDS && balance.getBalance() > 0) {
             setupNewRound();
-        } else {
-            JOptionPane.showMessageDialog(frame, "Game Over CHRISTOPHER");
+        } else if (!(roundsPlayed < MAX_ROUNDS) && balance.getBalance() > 0) {
+            JOptionPane.showMessageDialog(null, "Game over, your balance after 5 rounds is: " +balance.getBalance());
+            System.exit(0);
+        } else if (!(balance.getBalance() > 0) && roundsPlayed < MAX_ROUNDS) {
+            JOptionPane.showMessageDialog(null, "Insufficient balance, you were kicked out of the Casino");
+            System.exit(0);
         }
     }
     public void setupNewRound() {
