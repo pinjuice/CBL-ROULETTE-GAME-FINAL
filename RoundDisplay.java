@@ -1,5 +1,5 @@
-import javax.swing.*;
 import java.awt.Font;
+import javax.swing.*;
 
 public class RoundDisplay extends JLabel {
     

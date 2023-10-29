@@ -1,12 +1,12 @@
-import javax.swing.*;
 import java.awt.Font;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class BettingTimer {
     private static final Font FONT_LARGE = new Font("SansSerif", Font.BOLD, 24);
-    private static final int INITIAL_SECONDS = 20;
+    private static final int INITIAL_SECONDS = 0;
     private int secondsLeft;
     private boolean timeOver;
     private Timer bettingTimer;
@@ -15,7 +15,8 @@ public class BettingTimer {
     private RouletteLogic rouletteLogic;
     private PostAnimationTimer postAnimationTimer;
 
-    public BettingTimer(JLabel displayLabel, JLabel rouletteLabel, RouletteLogic rouletteLogic, PostAnimationTimer postAnimationTimer, BetSlider betSlider) {
+    public BettingTimer(JLabel displayLabel, JLabel rouletteLabel, RouletteLogic rouletteLogic,
+         PostAnimationTimer postAnimationTimer, BetSlider betSlider) {
         this.secondsLeft = INITIAL_SECONDS;
         this.timeOver = false;
         this.displayLabel = displayLabel;
@@ -57,9 +58,9 @@ public class BettingTimer {
                 if (dialog.getContentPane().getComponentCount() == 1
                     && dialog.getContentPane().getComponent(0) instanceof JOptionPane) {
                     dialog.dispose();
+                }
             }
         }
-    }
     }
 
     public boolean isTimeOver() {

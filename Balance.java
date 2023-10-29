@@ -1,5 +1,5 @@
-import javax.swing.*;
 import java.awt.Font;
+import javax.swing.*;
 
 public class Balance {
     private static final Font FONT_LARGE = new Font("SansSerif", Font.BOLD, 15);

@@ -3,7 +3,8 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Chip {
-    private int x, y;
+    private int x;
+    private int y;
     private int value;
     private final int radius = 30;
     private Color color;
@@ -40,6 +41,7 @@ public class Chip {
         String valueStr = String.valueOf(value);
         int textWidth = g2d.getFontMetrics().stringWidth(valueStr);
         int textHeight = g2d.getFontMetrics().getAscent();
-        g2d.drawString(valueStr, x - textWidth / 2, y + textHeight / 4);  // Adjust position to center the text
+        g2d.drawString(valueStr, x - textWidth / 2, y + textHeight / 4);
+        // Adjust position to center the text
     }
 }

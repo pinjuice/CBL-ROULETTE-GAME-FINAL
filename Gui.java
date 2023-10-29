@@ -77,7 +77,8 @@ public class Gui {
         betSlider = new BetSlider(frame);
         betSlider.getSlider().setBounds(940, 620, 300,  50);
         betSlider.getButton().setBounds(940, 680, 120, 30);
-        bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic, postAnimationTimer, betSlider);
+        bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic,
+         postAnimationTimer, betSlider);
         frame.add(betSlider.getSlider());
         frame.add(betSlider.getButton());
 
@@ -85,7 +86,8 @@ public class Gui {
         frame.add(renderer);
         
         // Betting mechanic setup
-        bettingMechanic = new BettingMechanic(boardRectangles, renderer, betSlider, bettingTimer, balance);
+        bettingMechanic = new BettingMechanic(boardRectangles, renderer,
+         betSlider, bettingTimer, balance);
      
         // Betting board image
         ImageIcon board = new ImageIcon("bettingboardCBL.jpg");
@@ -112,14 +114,18 @@ public class Gui {
         if (roundsPlayed < MAX_ROUNDS && balance.getBalance() > 0) {
             roundDisplay.incrementRound();
             setupNewRound();
-        } else if (!(roundsPlayed < MAX_ROUNDS) && balance.getBalance() > 0) {
-            UIManager.put("Button.focus", new Color(0,0,0,0));
-            JOptionPane.showMessageDialog(null, "Game over, your balance after 5 rounds is: " + balance.getBalance() + "$", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+        } else if (balance.getBalance() > 0) {
+            UIManager.put("Button.focus", new Color(0, 0, 0, 0));
+            JOptionPane.showMessageDialog(
+                null, "Game over, your balance after 5 rounds is: " 
+                + balance.getBalance() + "$", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 
             System.exit(0);
-        } else if (!(balance.getBalance() > 0) && roundsPlayed < MAX_ROUNDS) {
-            UIManager.put("Button.focus", new Color(0,0,0,0));
-            JOptionPane.showMessageDialog(null, "Insufficient balance, you were kicked out of the Casino", "Game Over" , JOptionPane.INFORMATION_MESSAGE);
+        } else if (roundsPlayed < MAX_ROUNDS) {
+            UIManager.put("Button.focus", new Color(0, 0, 0, 0));
+            JOptionPane.showMessageDialog(
+                    null, "Insufficient balance, you were kicked out of the Casino",
+                     "Game Over", JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
     }

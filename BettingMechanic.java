@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +5,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.*;
+
 
 public class BettingMechanic {
     private int lastClickedRectangle = -1;
@@ -16,7 +17,8 @@ public class BettingMechanic {
     private BettingTimer bettingTimer;
     private Balance balance;
 
-    public BettingMechanic(BoardRectangles boardRectangles, Renderer renderer, BetSlider betSlider, BettingTimer bettingTimer, Balance balance) {
+    public BettingMechanic(BoardRectangles boardRectangles, Renderer renderer,
+         BetSlider betSlider, BettingTimer bettingTimer, Balance balance) {
         this.boardRectangles = boardRectangles;
         this.renderer = renderer;
         this.betSlider = betSlider;
@@ -62,7 +64,7 @@ public class BettingMechanic {
                 chip = new Chip(0, 0, betValue);
                 Rectangle selectedRect = boardRectangles.boardRectangles[lastClickedRectangle];
                 chip.setPositionRect(selectedRect);
-                if (betValue > 0){
+                if (betValue > 0) {
                     renderer.addChip(chip);
                     chipsByRectangle.put(lastClickedRectangle, chip);  // Store the chip in the map
                 }
@@ -71,11 +73,13 @@ public class BettingMechanic {
                 // A chip for this square already exists, update its value
                 chip.setValue(chip.getValue() + betValue);
             }
-            UIManager.put("Button.focus", new Color(0,0,0,0));
-            JOptionPane.showMessageDialog(null, "You bet " + betValue + "$ on square " + (lastClickedRectangle) + ". Remaining balance: " + balance.getBalance()+"$", "Bet", JOptionPane.INFORMATION_MESSAGE);
+            UIManager.put("Button.focus", new Color(0, 0, 0, 0));
+            JOptionPane.showMessageDialog(null, "You bet " + betValue + "$ on square "
+                 + (lastClickedRectangle) + ". Remaining balance: " 
+                 + balance.getBalance() + "$", "Bet", JOptionPane.INFORMATION_MESSAGE);
 
             balance.updateDisplay();
-            renderer.repaint();  // Ensure the ChipRenderer is repainted to reflect the new chip value
+            renderer.repaint(); 
         }
         betSlider.hide();
     }

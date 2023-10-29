@@ -1,6 +1,6 @@
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class RouletteAnimation {
     
@@ -12,7 +12,8 @@ public class RouletteAnimation {
     private RouletteLogic rouletteLogic;
     private PostAnimationTimer postAnimationTimer;
 
-    public RouletteAnimation(JLabel rouletteLabel, RouletteLogic rouletteLogic, PostAnimationTimer postAnimationTimer) {
+    public RouletteAnimation(JLabel rouletteLabel, RouletteLogic rouletteLogic,
+         PostAnimationTimer postAnimationTimer) {
         this.rouletteLabel = rouletteLabel;
         this.rouletteLogic = rouletteLogic;
         this.postAnimationTimer = postAnimationTimer;

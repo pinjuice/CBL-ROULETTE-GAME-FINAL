@@ -49,10 +49,10 @@ public class RouletteTriangles {
     }
 
     public int getRenderX(int x1, int x3) {
-        return ((x1 + x3)/2);
+        return ((x1 + x3) / 2);
     }
 
     public int getRenderY(int y1, int y3) {
-        return ((y1 + y3)/2);
+        return ((y1 + y3) / 2);
     }
 }

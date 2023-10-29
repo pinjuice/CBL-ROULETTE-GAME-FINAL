@@ -2,7 +2,8 @@ import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
 public class Ball {
-    private int x, y;
+    private int x;
+    private int y;
     private final int radius = 20;
     private  Color color;
 

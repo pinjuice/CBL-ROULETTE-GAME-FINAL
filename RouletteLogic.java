@@ -11,7 +11,8 @@ public class RouletteLogic {
     private Renderer renderer;
     private Ball ball;
 
-    public RouletteLogic(Balance balance, BoardRectangles boardRectangles, RouletteTriangles rouletteTriangles, Renderer renderer) {
+    public RouletteLogic(Balance balance, BoardRectangles boardRectangles,
+         RouletteTriangles rouletteTriangles, Renderer renderer) {
         this.balance = balance;
         this.boardRectangles = boardRectangles;
         this.rouletteTriangles = rouletteTriangles;
