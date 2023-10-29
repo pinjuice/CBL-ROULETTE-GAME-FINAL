@@ -1,8 +1,10 @@
 import javax.swing.*;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BettingTimer {
+    private static final Font FONT_LARGE = new Font("SansSerif", Font.BOLD, 24);
     private static final int INITIAL_SECONDS = 20;
     private int secondsLeft;
     private boolean timeOver;
@@ -16,10 +18,12 @@ public class BettingTimer {
         this.secondsLeft = INITIAL_SECONDS;
         this.timeOver = false;
         this.displayLabel = displayLabel;
-        displayLabel.setText("Time for betting left: " + secondsLeft + " seconds");
+        displayLabel.setFont(FONT_LARGE);
         this.rouletteLabel = rouletteLabel;
         this.rouletteLogic = rouletteLogic;
         this.postAnimationTimer = postAnimationTimer;
+
+        displayLabel.setText("Time for betting left: " + secondsLeft + " seconds");
 
         bettingTimer = new Timer(1000, new ActionListener() {
             @Override

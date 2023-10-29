@@ -1,12 +1,18 @@
 import javax.swing.*;
+import java.awt.Font;
 
 public class Balance {
+    private static final Font FONT_LARGE = new Font("SansSerif", Font.BOLD, 15);
     private int amount;
     private JLabel balanceDisplay;
 
     public Balance(int initialAmount, JLabel balanceDisplay) {
         this.amount = initialAmount;
         this.balanceDisplay = balanceDisplay;
+
+        // Set the font size for balanceDisplay
+        balanceDisplay.setFont(FONT_LARGE);
+
         updateDisplay();  // Initially set the balance text
     }
 
@@ -29,6 +35,6 @@ public class Balance {
     }
 
     public void updateDisplay() {
-        balanceDisplay.setText("Your balance is: " + getBalance()+ "$");
+        balanceDisplay.setText("Your balance is: " + getBalance() + "$");
     }
 }

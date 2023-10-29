@@ -8,8 +8,10 @@ public class Gui {
     private JLabel timerLabel = new JLabel();
     private JLabel balanceDisplay = new JLabel();
     private JLabel rouletteLabel = new JLabel();
+    
 
     // Game mechanics and visuals
+    private RoundDisplay roundDisplay;
     private Balance balance;
     private BoardRectangles boardRectangles;
     private PostAnimationTimer postAnimationTimer;
@@ -33,11 +35,16 @@ public class Gui {
         frame.setLayout(null);
 
         // Timer label setup
-        timerLabel.setBounds(870, 10, 300, 50);
+        timerLabel.setBounds(870, 20, 400, 50);
         frame.add(timerLabel);
 
+        // Round display setup
+        roundDisplay = new RoundDisplay();
+        roundDisplay.setBounds(20, 20, 300, 50);
+        frame.add(roundDisplay);
+
         // Balance display setup
-        balanceDisplay.setBounds(700, 10, 300, 50);
+        balanceDisplay.setBounds(20, 45, 300, 50);
         frame.add(balanceDisplay);
 
         // Balance initialization
@@ -102,6 +109,7 @@ public class Gui {
     public void endOfRound() {
         roundsPlayed++;
         if (roundsPlayed < MAX_ROUNDS && balance.getBalance() > 0) {
+            roundDisplay.incrementRound();
             setupNewRound();
         } else if (!(roundsPlayed < MAX_ROUNDS) && balance.getBalance() > 0) {
             JOptionPane.showMessageDialog(null, "Game over, your balance after 5 rounds is: " +balance.getBalance()+"$");
