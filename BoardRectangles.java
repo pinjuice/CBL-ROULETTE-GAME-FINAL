@@ -1,12 +1,9 @@
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import javax.swing.JLabel;
-
 public class BoardRectangles {
-    public Rectangle[] boardRectangles;
     public int[] sumBoardRectangles;
-    private JLabel[] sumBoardRectanglesLabels;
+    public Rectangle[] boardRectangles;
 
     public BoardRectangles() {
         boardRectangles = new Rectangle[] {
@@ -25,10 +22,9 @@ public class BoardRectangles {
             new Rectangle(1175, 485, 1321-1175, 580-485)
         };
         sumBoardRectangles = new int[boardRectangles.length];
-        sumBoardRectanglesLabels = new JLabel[boardRectangles.length];  // Initialize the sumSquares array with zeros
     }
 
-    public int getSquareIndex(Point p) {
+    public int getBoardRectangleIndex(Point p) {
         for (int i = 0; i < boardRectangles.length; i++) {
             if (boardRectangles[i].contains(p)) {
                 return i;
@@ -37,15 +33,11 @@ public class BoardRectangles {
         return -1;
     }
 
-    public int getNumberOfSquares() {
+    public int getNumberOfBoardRectangles() {
         return boardRectangles.length;
     }
 
-    public int[] getSumSquares() {
+    public int[] getSumBoardRectangles() {
         return sumBoardRectangles;
-    }
-
-    public JLabel[] getSumSquaresJLabels() {
-        return sumBoardRectanglesLabels;
     }
 }

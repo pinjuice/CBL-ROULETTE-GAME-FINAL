@@ -16,16 +16,8 @@ public class Renderer extends JPanel {
         chips.add(chip);
     }
 
-    public List<Chip> getChips() {
-        return chips;
-    }
-
     public void addBall(Ball ball) {
         balls.add(ball);
-    }
-
-    public List<Ball> getBalls() {
-        return balls;
     }
 
     public void reset() {
@@ -43,7 +35,7 @@ public class Renderer extends JPanel {
         }
 
         for (Ball ball : balls) {
-            ball.draw(g); // This assumes the Ball class has a similar draw method like Chip.
+            ball.draw(g);
         }
     }
 }

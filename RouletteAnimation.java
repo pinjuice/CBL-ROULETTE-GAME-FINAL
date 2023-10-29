@@ -3,14 +3,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RouletteAnimation {
-
-    private ImageIcon[] images = new ImageIcon[24];
-    private Timer timer1;
-    private Timer stopTimer; 
+    
     private int currentIndex = 0;
+    private ImageIcon[] images = new ImageIcon[24];
+    private Timer roulettePhotosTimer;
+    private Timer animationTimer; 
     private JLabel rouletteLabel;
     private RouletteLogic rouletteLogic;
-    private boolean isAnimationOver = false;
     private PostAnimationTimer postAnimationTimer;
 
     public RouletteAnimation(JLabel rouletteLabel, RouletteLogic rouletteLogic, PostAnimationTimer postAnimationTimer) {
@@ -23,7 +22,7 @@ public class RouletteAnimation {
         }
 
         int delay = 1000 / 100; // To show all images in 1 second
-        timer1 = new Timer(delay, new ActionListener() {
+        roulettePhotosTimer = new Timer(delay, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateImage();
@@ -37,38 +36,30 @@ public class RouletteAnimation {
     }
 
     public void startAnimation() {
-        timer1.start();
-        
-        // To stop the animation after 5,7 seconds (for now unknown reason)
-        stopTimer = new  Timer(5000, new ActionListener() {
+        animationTimer = new  Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                timer1.stop();
+                roulettePhotosTimer.stop();
+                animationTimer.stop();
                 rouletteLabel.setIcon(images[0]); // Always stop on roulette1.png
                 rouletteLogic.placeChipOnTriangle(rouletteLogic.getWinningNumber());
-                stopTimer.stop();
-                isAnimationOver = true;
                 postAnimationTimer.startPostAnimationTimer();
-                rouletteLogic.checkWinningSquareAndUpdateBalance();
+                rouletteLogic.checkWinningBoardRectangleAndUpdateBalance();
                 
             }
         });
-        stopTimer.start();
-    }
-
-    public boolean getIsAnimationOver() {
-        return isAnimationOver;
+        roulettePhotosTimer.start();
+        animationTimer.start();
     }
 
     public void resetAnimation() {
-        if (timer1.isRunning()) {
-            timer1.stop();
+        if (roulettePhotosTimer.isRunning()) {
+            roulettePhotosTimer.stop();
         }
-        if (stopTimer != null && stopTimer.isRunning()) {
-            stopTimer.stop();
+        if (animationTimer != null && animationTimer.isRunning()) {
+            animationTimer.stop();
         }
         currentIndex = 0;
-        isAnimationOver = false;
     }
     
 }   

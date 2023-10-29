@@ -1,16 +1,15 @@
-import java.awt.Color;
 import java.awt.Point;
 import java.util.Random;
 
 public class RouletteLogic {
     private int upperbound = 13;
-    Random rand = new Random();
-    private int int_random;
+    private int winningNumber;
+    private Random rand = new Random();
     private Balance balance;
     private BoardRectangles boardRectangles;
     private RouletteTriangles rouletteTriangles;
-    private Ball ball;
     private Renderer renderer;
+    private Ball ball;
 
     public RouletteLogic(Balance balance, BoardRectangles boardRectangles, RouletteTriangles rouletteTriangles, Renderer renderer) {
         this.balance = balance;
@@ -20,12 +19,12 @@ public class RouletteLogic {
     }
 
     public void spin() {
-        int_random = rand.nextInt(upperbound);
+        winningNumber = rand.nextInt(upperbound);
     }
 
-    public void checkWinningSquareAndUpdateBalance() {
+    public void checkWinningBoardRectangleAndUpdateBalance() {
         int winningSquare = getWinningNumber();
-        int[] sumSquares = boardRectangles.getSumSquares();
+        int[] sumSquares = boardRectangles.getSumBoardRectangles();
         if (sumSquares[winningSquare] > 0) {
             int winnings = sumSquares[winningSquare] * 13;
             balance.add(winnings);
@@ -33,13 +32,12 @@ public class RouletteLogic {
     }
 
     public int getWinningNumber() {
-        return int_random;
+        return winningNumber;
     }
-
 
     public void placeChipOnTriangle(int triangleIndex) {
         Point renderPoint = rouletteTriangles.renderPoints[triangleIndex];
-        ball = new Ball(0, 0, Color.WHITE);
+        ball = new Ball(0, 0);
         ball.setPosition(renderPoint.x, renderPoint.y);
         renderer.addBall(ball);
     }

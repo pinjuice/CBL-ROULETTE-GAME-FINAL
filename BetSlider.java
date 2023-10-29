@@ -5,7 +5,7 @@ public class BetSlider {
     private static final int MAX_PERCENTAGE = 100;
     private JSlider slider;
     private JButton button;
-    JFrame parentFrame;
+    public JFrame parentFrame;
 
     public BetSlider(JFrame frame) {
         this.parentFrame = frame;

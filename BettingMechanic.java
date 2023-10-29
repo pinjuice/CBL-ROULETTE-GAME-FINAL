@@ -1,4 +1,3 @@
-// BettingMechanic.java
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,17 +8,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BettingMechanic {
+    private int lastClickedRectangle = -1;
+    private Map<Integer, Chip> chipsByRectangle = new HashMap<>();
     private BoardRectangles boardRectangles;
     private Renderer renderer;
     private BetSlider betSlider;
     private BettingTimer bettingTimer;
     private Balance balance;
-    private int lastClickedRectangle = -1;
-    private Map<Integer, Chip> chipsByRectangle = new HashMap<>();  // New field
 
     public BettingMechanic(BoardRectangles boardRectangles, Renderer renderer, BetSlider betSlider, BettingTimer bettingTimer, Balance balance) {
         this.boardRectangles = boardRectangles;
-        this.renderer = renderer;  // Store the ChipRenderer instance
+        this.renderer = renderer;
         this.betSlider = betSlider;
         this.bettingTimer = bettingTimer;
         this.balance = balance;
@@ -40,7 +39,7 @@ public class BettingMechanic {
     }
 
     private void handleMousePressed(MouseEvent e) {
-        int squareIndex = boardRectangles.getSquareIndex(e.getPoint());
+        int squareIndex = boardRectangles.getBoardRectangleIndex(e.getPoint());
         if (squareIndex != -1) {
             lastClickedRectangle = squareIndex;  // Store the last clicked square
             if (!bettingTimer.isTimeOver() && balance.getBalance() > 0) {
@@ -55,18 +54,19 @@ public class BettingMechanic {
 
         if (lastClickedRectangle != -1 && balance.canDeduct(betValue)) {
             balance.deduct(betValue);
-            boardRectangles.getSumSquares()[lastClickedRectangle] += betValue;
-
+            boardRectangles.getSumBoardRectangles()[lastClickedRectangle] += betValue;
             Chip chip = chipsByRectangle.get(lastClickedRectangle);
+
             if (chip == null) {
                 // No chip for this square yet, create a new one
-                chip = new Chip(0, 0, Color.RED, betValue);
+                chip = new Chip(0, 0, betValue);
                 Rectangle selectedRect = boardRectangles.boardRectangles[lastClickedRectangle];
                 chip.setPositionRect(selectedRect);
                 if (betValue > 0){
                     renderer.addChip(chip);
                     chipsByRectangle.put(lastClickedRectangle, chip);  // Store the chip in the map
                 }
+
             } else {
                 // A chip for this square already exists, update its value
                 chip.setValue(chip.getValue() + betValue);
@@ -80,7 +80,7 @@ public class BettingMechanic {
     }
 
     public void resetBets() {
-        for (int i = 0; i < boardRectangles.getNumberOfSquares(); i++) {
+        for (int i = 0; i < boardRectangles.getNumberOfBoardRectangles(); i++) {
             boardRectangles.sumBoardRectangles[i] = 0;
         }
         chipsByRectangle.clear();

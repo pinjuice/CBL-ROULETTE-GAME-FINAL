@@ -4,6 +4,7 @@ import java.awt.Polygon;
 public class RouletteTriangles {
     public Polygon[] triangles;
     public Point[] renderPoints;
+    
     public RouletteTriangles() {
         triangles = new Polygon[] {
             createTriangle(387, 393, 461, 686, 387, 700, 312, 689), //0
@@ -45,10 +46,6 @@ public class RouletteTriangles {
             }
         }
         return -1;
-    }
-
-    public int getNumberOfTriangles() {
-        return triangles.length;
     }
 
     public int getRenderX(int x1, int x3) {

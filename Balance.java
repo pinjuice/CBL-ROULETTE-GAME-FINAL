@@ -28,7 +28,6 @@ public class Balance {
         return amount - value >= 0;
     }
 
-    // Private method to update the JLabel with the current balance
     public void updateDisplay() {
         balanceDisplay.setText("Your balance is: " + getBalance()+ "$");
     }

@@ -2,78 +2,103 @@ import javax.swing.*;
 
 public class Gui {
     
-    JFrame frame = new JFrame("CBLRoulette");
-    JLabel labelBoard = new JLabel();
-    JLabel timerLabel = new JLabel();
-    JLabel balanceDisplay = new JLabel();
-    JLabel rouletteLabel = new JLabel();
+    // Frame components
+    private JFrame frame = new JFrame("CBLRoulette");
+    private JLabel boardLabel = new JLabel();
+    private JLabel timerLabel = new JLabel();
+    private JLabel balanceDisplay = new JLabel();
+    private JLabel rouletteLabel = new JLabel();
 
-    Renderer renderer;
-    BettingTimer bettingTimer;
-    BettingMechanic bettingMechanic;
-    BoardRectangles boardRectangles;
-    Balance balance = new Balance(1000, balanceDisplay);
-    RouletteLogic rouletteLogic;
-    BetSlider betSlider;
-    RouletteAnimation rouletteAnimation;
-    RouletteTriangles rouletteTriangles;
-    PostAnimationTimer postAnimationTimer;
+    // Game mechanics and visuals
+    private Balance balance;
+    private BoardRectangles boardRectangles;
+    private PostAnimationTimer postAnimationTimer;
+    private Renderer renderer;
+    private RouletteTriangles rouletteTriangles;
+    private RouletteLogic rouletteLogic;
+    private RouletteAnimation rouletteAnimation;
+    private BetSlider betSlider;
+    private BettingTimer bettingTimer;
+    private BettingMechanic bettingMechanic;
 
+    // Game settings
     private int roundsPlayed = 0;
     private static final int MAX_ROUNDS = 5;
 
+    // Constructor initializes the GUI and game components
     public Gui() {
+        // Basic frame settings
         frame.setSize(1920, 1080);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
 
+        // Timer label setup
         timerLabel.setBounds(870, 10, 300, 50);
         frame.add(timerLabel);
 
+        // Balance display setup
         balanceDisplay.setBounds(700, 10, 300, 50);
         frame.add(balanceDisplay);
+
+        // Balance initialization
+        balance = new Balance(1000, balanceDisplay);
         
+        // Board rectangles for betting
         boardRectangles = new BoardRectangles();
 
+        // Post-animation timer initialization
         postAnimationTimer = new PostAnimationTimer(this);
         
+        // Renderer for the game visuals
         renderer = new Renderer();
-        // NOTE: You'll need to initialize rouletteTriangles here as well before using it
-        // rouletteTriangles = new RouletteTriangles(...);
-        rouletteTriangles = new RouletteTriangles();
-        rouletteLogic = new RouletteLogic(balance, boardRectangles, rouletteTriangles, renderer);
-        rouletteAnimation = new RouletteAnimation(rouletteLabel, rouletteLogic, postAnimationTimer);
-        
+
+        // Renderer bounds and settings
         renderer.setBounds(0, 0, 1920, 1080);
         renderer.setOpaque(false);
+        
+        // Roulette triangles for the wheel
+        rouletteTriangles = new RouletteTriangles();
+        
+        // Core game logic initialization
+        rouletteLogic = new RouletteLogic(balance, boardRectangles, rouletteTriangles, renderer);
+        
+        // Roulette animation setup
+        rouletteAnimation = new RouletteAnimation(rouletteLabel, rouletteLogic, postAnimationTimer);
 
-        // Initialize and position BetSlider before BettingMechanic
+        // Betting slider setup
         betSlider = new BetSlider(frame);
         betSlider.getSlider().setBounds(940, 620, 300,  50);
         betSlider.getButton().setBounds(940, 680, 120, 30);
         bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic, postAnimationTimer, betSlider);
         frame.add(betSlider.getSlider());
         frame.add(betSlider.getButton());
-        
-        // Initialize BettingMechanic after BetSlider
-        bettingMechanic = new BettingMechanic(boardRectangles, renderer, betSlider, bettingTimer, balance);
 
+        // Add renderer to frame
         frame.add(renderer);
+        
+        // Betting mechanic setup
+        bettingMechanic = new BettingMechanic(boardRectangles, renderer, betSlider, bettingTimer, balance);
      
+        // Betting board image
         ImageIcon board = new ImageIcon("bettingboardCBL.jpg");
-        labelBoard.setIcon(board);
-        labelBoard.setBounds(870, 80, 454, 503);
-        frame.add(labelBoard);
+        boardLabel.setIcon(board);
+        boardLabel.setBounds(870, 80, 454, 503);
+        frame.add(boardLabel);
 
+        // Roulette wheel image
         ImageIcon roulette = new ImageIcon("roulette_animation/roulette1.png");
         rouletteLabel.setIcon(roulette);
         rouletteLabel.setBounds(20, 40, 738, 671);
         frame.add(rouletteLabel);
         
+        // Make the frame visible
         frame.setVisible(true);
 
+        // Setup initial round
         setupNewRound();
     }
+
+    // Handle actions at the end of each round
     public void endOfRound() {
         roundsPlayed++;
         if (roundsPlayed < MAX_ROUNDS && balance.getBalance() > 0) {
@@ -86,12 +111,16 @@ public class Gui {
             System.exit(0);
         }
     }
+
+    // Reset the game state for a new round
     public void setupNewRound() {
         renderer.reset();
         bettingMechanic.resetBets();
         bettingTimer.resetTimer();
         rouletteAnimation.resetAnimation();
     }
+
+    // Main entry point for the application
     public static void main(String[] args) {
         new Gui();
     }

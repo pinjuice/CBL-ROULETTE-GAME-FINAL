@@ -3,25 +3,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BettingTimer {
-    private Timer timer;
+    private static final int INITIAL_SECONDS = 20;
     private int secondsLeft;
-    private JLabel rouletteLabel;  // For the roulette animation
-    private JLabel displayLabel;   // For displaying messages
     private boolean timeOver;
+    private Timer bettingTimer;
+    private JLabel displayLabel;   
+    private JLabel rouletteLabel;   
     private RouletteLogic rouletteLogic;
     private PostAnimationTimer postAnimationTimer;
-    private static final int INITIAL_SECONDS = 20;  // Initial countdown time.
 
     public BettingTimer(JLabel displayLabel, JLabel rouletteLabel, RouletteLogic rouletteLogic, PostAnimationTimer postAnimationTimer, BetSlider betSlider) {
-        this.displayLabel = displayLabel;
-        this.rouletteLabel = rouletteLabel;
-        this.rouletteLogic = rouletteLogic;
         this.secondsLeft = INITIAL_SECONDS;
         this.timeOver = false;
-        this.postAnimationTimer = postAnimationTimer;
+        this.displayLabel = displayLabel;
         displayLabel.setText("Time for betting left: " + secondsLeft + " seconds");
+        this.rouletteLabel = rouletteLabel;
+        this.rouletteLogic = rouletteLogic;
+        this.postAnimationTimer = postAnimationTimer;
 
-        timer = new Timer(1000, new ActionListener() {
+        bettingTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (secondsLeft > 0) {
@@ -40,12 +40,10 @@ public class BettingTimer {
     }
 
     private void endBetting() {
-        timer.stop();
+        bettingTimer.stop();
         displayLabel.setText("Time for betting is over");
-
-        // Start the roulette animation on rouletteLabel
-        new RouletteAnimation(rouletteLabel, rouletteLogic, postAnimationTimer).startAnimation();
         timeOver = true;
+        new RouletteAnimation(rouletteLabel, rouletteLogic, postAnimationTimer).startAnimation();
         rouletteLogic.spin(); 
     }
 
@@ -54,18 +52,13 @@ public class BettingTimer {
     }
 
     public void resetTimer() {
-        if(timer.isRunning()) {
-            timer.stop();
-        }
         secondsLeft = INITIAL_SECONDS;
         timeOver = false;
         displayLabel.setText("Time for betting left: " + secondsLeft + " seconds");
-        timer.start();
+        bettingTimer.start();
     }
 
     public void start() {
-        if(!timer.isRunning()) {
-            timer.start();
-        }
+        bettingTimer.start();
     }
 }
