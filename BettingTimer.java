@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -49,6 +50,16 @@ public class BettingTimer {
         timeOver = true;
         new RouletteAnimation(rouletteLabel, rouletteLogic, postAnimationTimer).startAnimation();
         rouletteLogic.spin(); 
+        Window[] windows = Window.getWindows();
+        for (Window window : windows) {
+            if (window instanceof JDialog) {
+                JDialog dialog = (JDialog) window;
+                if (dialog.getContentPane().getComponentCount() == 1
+                    && dialog.getContentPane().getComponent(0) instanceof JOptionPane) {
+                    dialog.dispose();
+            }
+        }
+    }
     }
 
     public boolean isTimeOver() {

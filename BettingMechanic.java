@@ -71,7 +71,7 @@ public class BettingMechanic {
                 // A chip for this square already exists, update its value
                 chip.setValue(chip.getValue() + betValue);
             }
-
+            UIManager.put("Button.focus", new Color(0,0,0,0));
             JOptionPane.showMessageDialog(null, "You bet " + betValue + "$ on square " + (lastClickedRectangle) + ". Remaining balance: " + balance.getBalance()+"$");
             balance.updateDisplay();
             renderer.repaint();  // Ensure the ChipRenderer is repainted to reflect the new chip value

@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import javax.swing.*;
 
 public class Gui {
@@ -44,7 +46,7 @@ public class Gui {
         frame.add(roundDisplay);
 
         // Balance display setup
-        balanceDisplay.setBounds(20, 45, 300, 50);
+        balanceDisplay.setBounds(20, 45, 400, 50);
         frame.add(balanceDisplay);
 
         // Balance initialization
@@ -112,9 +114,11 @@ public class Gui {
             roundDisplay.incrementRound();
             setupNewRound();
         } else if (!(roundsPlayed < MAX_ROUNDS) && balance.getBalance() > 0) {
+            UIManager.put("Button.focus", new Color(0,0,0,0));
             JOptionPane.showMessageDialog(null, "Game over, your balance after 5 rounds is: " +balance.getBalance()+"$");
             System.exit(0);
         } else if (!(balance.getBalance() > 0) && roundsPlayed < MAX_ROUNDS) {
+            UIManager.put("Button.focus", new Color(0,0,0,0));
             JOptionPane.showMessageDialog(null, "Insufficient balance, you were kicked out of the Casino");
             System.exit(0);
         }

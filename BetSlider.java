@@ -21,6 +21,7 @@ public class BetSlider {
 
         // Create the button
         button = new JButton("Place Bet");
+        button.setFocusPainted(false);
         button.setVisible(false);  // Initially hidden
     }
 
