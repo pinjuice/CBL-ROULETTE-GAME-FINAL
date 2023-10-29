@@ -6,7 +6,7 @@ import javax.swing.*;
 
 public class BettingTimer {
     private static final Font FONT_LARGE = new Font("SansSerif", Font.BOLD, 24);
-    private static final int INITIAL_SECONDS = 0;
+    private static final int INITIAL_SECONDS = 20;
     private int secondsLeft;
     private boolean timeOver;
     private Timer bettingTimer;

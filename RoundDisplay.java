@@ -5,7 +5,8 @@ public class RoundDisplay extends JLabel {
     
     private int currentRound;
     private static final String PREFIX = "Round: ";
-    private static final Font FONT_LARGE = new Font("SansSerif", Font.BOLD, 24);  // Using a bold SansSerif font of size 24
+    private static final Font FONT_LARGE = 
+        new Font("SansSerif", Font.BOLD, 24);  // Using a bold SansSerif font of size 24
 
     // Constructor initializes the label with starting round
     public RoundDisplay() {
