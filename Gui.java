@@ -47,7 +47,6 @@ public class Gui {
         rouletteTriangles = new RouletteTriangles();
         rouletteLogic = new RouletteLogic(balance, boardRectangles, winningNumberLabel, rouletteTriangles, renderer);
         rouletteAnimation = new RouletteAnimation(rouletteLabel, rouletteLogic, postAnimationTimer);
-        bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic, postAnimationTimer);
         
         renderer.setBounds(0, 0, 1920, 1080);
         renderer.setOpaque(false);
@@ -56,6 +55,7 @@ public class Gui {
         betSlider = new BetSlider(frame);
         betSlider.getSlider().setBounds(940, 620, 300,  50);
         betSlider.getButton().setBounds(940, 680, 120, 30);
+        bettingTimer = new BettingTimer(timerLabel, rouletteLabel, rouletteLogic, postAnimationTimer, betSlider);
         frame.add(betSlider.getSlider());
         frame.add(betSlider.getButton());
         

@@ -10,17 +10,15 @@ public class BettingTimer {
     private boolean timeOver;
     private RouletteLogic rouletteLogic;
     private PostAnimationTimer postAnimationTimer;
-
     private static final int INITIAL_SECONDS = 10;  // Initial countdown time.
 
-    public BettingTimer(JLabel displayLabel, JLabel rouletteLabel, RouletteLogic rouletteLogic, PostAnimationTimer postAnimationTimer) {
+    public BettingTimer(JLabel displayLabel, JLabel rouletteLabel, RouletteLogic rouletteLogic, PostAnimationTimer postAnimationTimer, BetSlider betSlider) {
         this.displayLabel = displayLabel;
         this.rouletteLabel = rouletteLabel;
         this.rouletteLogic = rouletteLogic;
         this.secondsLeft = INITIAL_SECONDS;
         this.timeOver = false;
         this.postAnimationTimer = postAnimationTimer;
-
         displayLabel.setText("Time for betting left: " + secondsLeft + " seconds");
 
         timer = new Timer(1000, new ActionListener() {
@@ -31,6 +29,7 @@ public class BettingTimer {
                     updateDisplay();
                 } else {
                     endBetting();
+                    betSlider.hide();
                 }
             }
         });
