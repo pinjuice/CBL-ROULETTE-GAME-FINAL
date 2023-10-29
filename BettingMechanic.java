@@ -63,14 +63,16 @@ public class BettingMechanic {
                 chip = new Chip(0, 0, Color.RED, betValue);
                 Rectangle selectedRect = boardRectangles.boardRectangles[lastClickedRectangle];
                 chip.setPositionRect(selectedRect);
-                renderer.addChip(chip);
-                chipsByRectangle.put(lastClickedRectangle, chip);  // Store the chip in the map
+                if (betValue > 0){
+                    renderer.addChip(chip);
+                    chipsByRectangle.put(lastClickedRectangle, chip);  // Store the chip in the map
+                }
             } else {
                 // A chip for this square already exists, update its value
                 chip.setValue(chip.getValue() + betValue);
             }
 
-            JOptionPane.showMessageDialog(null, "You bet " + betValue + "$ on square " + (lastClickedRectangle) + ". Remaining balance: " + balance.getBalance());
+            JOptionPane.showMessageDialog(null, "You bet " + betValue + "$ on square " + (lastClickedRectangle) + ". Remaining balance: " + balance.getBalance()+"$");
             balance.updateDisplay();
             renderer.repaint();  // Ensure the ChipRenderer is repainted to reflect the new chip value
         }

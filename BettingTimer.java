@@ -10,7 +10,7 @@ public class BettingTimer {
     private boolean timeOver;
     private RouletteLogic rouletteLogic;
     private PostAnimationTimer postAnimationTimer;
-    private static final int INITIAL_SECONDS = 10;  // Initial countdown time.
+    private static final int INITIAL_SECONDS = 20;  // Initial countdown time.
 
     public BettingTimer(JLabel displayLabel, JLabel rouletteLabel, RouletteLogic rouletteLogic, PostAnimationTimer postAnimationTimer, BetSlider betSlider) {
         this.displayLabel = displayLabel;
