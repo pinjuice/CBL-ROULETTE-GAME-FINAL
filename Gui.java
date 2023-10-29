@@ -1,6 +1,15 @@
 import java.awt.Color;
 import javax.swing.*;
 
+/**
+ * This class is the main graphical user interface for the roulette game.
+ * <p>
+ * The Gui class manages the game's visual representation and interaction. It sets up 
+ * the game components and handles the game progression through various rounds. The game 
+ * supports a maximum number of rounds and will end when the maximum rounds are reached 
+ * or when the player has an insufficient balance which means the balance will be equal to 0.
+ * </p>
+ */
 public class Gui {
     
     // Frame components
@@ -10,7 +19,6 @@ public class Gui {
     private JLabel balanceDisplay = new JLabel();
     private JLabel rouletteLabel = new JLabel();
     
-
     // Game mechanics and visuals
     private RoundDisplay roundDisplay;
     private Balance balance;
@@ -28,7 +36,9 @@ public class Gui {
     private int roundsPlayed = 0;
     private static final int MAX_ROUNDS = 5;
 
-    // Constructor initializes the GUI and game components
+    /**
+     * Constructs the game GUI, initializing game components and setting up the main frame.
+     */
     public Gui() {
         // Basic frame settings
         frame.setSize(1920, 1080);
@@ -108,7 +118,10 @@ public class Gui {
         setupNewRound();
     }
 
-    // Handle actions at the end of each round
+    /**
+     * Handles the end-of-round actions, such as determining if the game continues 
+     * to the next round or if it's over based on played rounds and user's balance.
+     */
     public void endOfRound() {
         roundsPlayed++;
         if (roundsPlayed < MAX_ROUNDS && balance.getBalance() > 0) {
@@ -130,7 +143,11 @@ public class Gui {
         }
     }
 
-    // Reset the game state for a new round
+    /**
+     * Resets the game state to prepare for a new round. This includes clearing any 
+     * bets, reseting rendering panel. resetting timers, 
+     * and setting the roulette animation to its initial state.
+     */
     public void setupNewRound() {
         renderer.reset();
         bettingMechanic.resetBets();
@@ -138,7 +155,9 @@ public class Gui {
         rouletteAnimation.resetAnimation();
     }
 
-    // Main entry point for the application
+    /**
+     * The main entry point for the application. Initializes and starts the roulette game GUI.
+     */
     public static void main(String[] args) {
         new Gui();
     }
