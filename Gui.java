@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Gui {
     
     // Frame components
-    private JFrame frame = new JFrame("CBLRoulette");
+    private JFrame frame = new JFrame("CBLRouletteGame");
     private JLabel boardLabel = new JLabel();
     private JLabel timerLabel = new JLabel();
     private JLabel balanceDisplay = new JLabel();
@@ -104,7 +104,7 @@ public class Gui {
         if (roundsPlayed < MAX_ROUNDS && balance.getBalance() > 0) {
             setupNewRound();
         } else if (!(roundsPlayed < MAX_ROUNDS) && balance.getBalance() > 0) {
-            JOptionPane.showMessageDialog(null, "Game over, your balance after 5 rounds is: " +balance.getBalance());
+            JOptionPane.showMessageDialog(null, "Game over, your balance after 5 rounds is: " +balance.getBalance()+"$");
             System.exit(0);
         } else if (!(balance.getBalance() > 0) && roundsPlayed < MAX_ROUNDS) {
             JOptionPane.showMessageDialog(null, "Insufficient balance, you were kicked out of the Casino");
