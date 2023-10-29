@@ -10,7 +10,7 @@ import javax.swing.*;
 public class Balance {
 
     private static final Font FONT_LARGE = new Font("SansSerif", Font.BOLD, 15);
-    private int amount;
+    private int balance;
     private JLabel balanceDisplay;
 
     /**
@@ -20,7 +20,7 @@ public class Balance {
      * @param balanceDisplay  the JLabel used to display the current balance.
      */
     public Balance(int initialAmount, JLabel balanceDisplay) {
-        this.amount = initialAmount;
+        this.balance = initialAmount;
         this.balanceDisplay = balanceDisplay;
 
         // Set the font size for balanceDisplay
@@ -35,7 +35,7 @@ public class Balance {
      * @return the current balance.
      */
     public int getBalance() {
-        return amount;
+        return balance;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Balance {
      * @param value  the amount to be deducted from the balance.
      */
     public void deduct(int value) {
-        this.amount -= value;
+        this.balance -= value;
         updateDisplay();  // Update the display after deducting the amount
     }
 
@@ -54,7 +54,7 @@ public class Balance {
      * @param value  the amount to be added to the balance.
      */
     public void add(int value) {
-        this.amount += value;
+        this.balance += value;
         updateDisplay();  // Update the display after adding the amount
     }
 
@@ -65,7 +65,7 @@ public class Balance {
      * @return true if the balance can be deducted by the specified amount, false otherwise.
      */
     public boolean canDeduct(int value) {
-        return amount - value >= 0;
+        return balance - value >= 0;
     }
 
     /**
