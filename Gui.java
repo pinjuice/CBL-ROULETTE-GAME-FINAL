@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class Gui {
     
-    JFrame frame = new JFrame("Cheating Roulette");
+    JFrame frame = new JFrame("CBLRoulette");
     JLabel labelBoard = new JLabel();
     JLabel timerLabel = new JLabel();
     JLabel balanceDisplay = new JLabel();
@@ -80,7 +80,7 @@ public class Gui {
     }
     public void endOfRound() {
         roundsPlayed++;
-        if (roundsPlayed < MAX_ROUNDS) {
+        if (roundsPlayed < MAX_ROUNDS && balance.getBalance() > 0) {
             setupNewRound();
         } else {
             JOptionPane.showMessageDialog(frame, "Game Over CHRISTOPHER");
